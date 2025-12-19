@@ -91,6 +91,8 @@ export class UserService {
         name: data.name,
         email: data.email,
         password: hashedPassword,
+        picture: data.picture,
+        role: data.role,
         age: data.age,
       })
       .returning();

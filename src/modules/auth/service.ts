@@ -2,7 +2,7 @@ import { eq } from "drizzle-orm";
 import db from "../../database/db-config";
 import { usersTable } from "../../database/db-schema";
 import { AuthModel } from "./model";
-import { hash, password } from "bun";
+import { password } from "bun";
 
 export class AuthService {
   static async signUp(data: typeof AuthModel.signUpBody.static) {
@@ -24,7 +24,6 @@ export class AuthService {
           name: data.name,
           email: data.email,
           password: hashedPassword,
-          age: data.age,
         })
         .returning()
     )[0];

@@ -6,6 +6,8 @@ export const UserModel = {
     name: t.String({ minLength: 3, maxLength: 50 }),
     email: t.String({ format: "email" }),
     password: t.String({ minLength: 5 }),
+    picture: t.Optional(t.String({ maxLength: 500 })),
+    role: t.Optional(t.Union([t.Literal("admin"), t.Literal("user")])),
     age: t.Number({ minimum: 0, maximum: 150 }),
   }),
 
@@ -13,6 +15,8 @@ export const UserModel = {
     t.Object({
       name: t.String({ minLength: 3, maxLength: 50 }),
       email: t.String({ format: "email" }),
+      picture: t.String({ maxLength: 500 }),
+      role: t.Union([t.Literal("admin"), t.Literal("user")]),
       age: t.Number({ minimum: 0, maximum: 150 }),
     })
   ),
@@ -29,9 +33,11 @@ export const UserModel = {
     id: t.Number(),
     name: t.String(),
     email: t.String(),
+    picture: t.Union([t.String(), t.Null()]),
+    role: t.Union([t.Literal("admin"), t.Literal("user")]),
     age: t.Union([t.Number(), t.Null()]),
-    created_at: t.Date(),
-    updated_at: t.Union([t.Date(), t.Null()]),
+    createdAt: t.Date(),
+    updatedAt: t.Union([t.Date(), t.Null()]),
   }),
 
   usersListResponse: t.Object({
@@ -40,9 +46,11 @@ export const UserModel = {
         id: t.Number(),
         name: t.String(),
         email: t.String(),
+        picture: t.Union([t.String(), t.Null()]),
+        role: t.Union([t.Literal("admin"), t.Literal("user")]),
         age: t.Union([t.Number(), t.Null()]),
-        created_at: t.Date(),
-        updated_at: t.Union([t.Date(), t.Null()]),
+        createdAt: t.Date(),
+        updatedAt: t.Union([t.Date(), t.Null()]),
       })
     ),
     total: t.Number(),

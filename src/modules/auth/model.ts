@@ -5,7 +5,6 @@ export const AuthModel = {
     name: t.String({ minLength: 3, maxLength: 50 }),
     email: t.String({ format: "email" }),
     password: t.String({ minLength: 5 }),
-    age: t.Optional(t.Number()),
   }),
 
   signInBody: t.Object({
@@ -18,6 +17,11 @@ export const AuthModel = {
       id: t.Number(),
       name: t.String(),
       email: t.String(),
+      picture: t.Union([t.String(), t.Null()]),
+      role: t.Union([t.Literal("admin"), t.Literal("user")]),
+      age: t.Union([t.Number(), t.Null()]),
+      createdAt: t.Date(),
+      updatedAt: t.Union([t.Date(), t.Null()]),
     }),
     token: t.String(),
   }),

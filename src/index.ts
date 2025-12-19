@@ -3,6 +3,10 @@ import jwt from "@elysiajs/jwt";
 import { Elysia, t } from "elysia";
 import { auth } from "./modules/auth";
 import { user } from "./modules/user";
+import { vehicle } from "./modules/vehicles";
+import { vehicleImage } from "./modules/vehicle-images";
+import { car } from "./modules/cars";
+import { motorcycle } from "./modules/motorcycles";
 import openapi from "@elysiajs/openapi";
 import { logger } from "elysia-logger";
 import { Logestic } from "logestic";
@@ -33,6 +37,10 @@ const app = new Elysia()
 
     if (
       error.message === "User not found" ||
+      error.message === "Vehicle not found" ||
+      error.message === "Vehicle image not found" ||
+      error.message === "Car not found" ||
+      error.message === "Motorcycle not found" ||
       error.message.includes("not found")
     ) {
       set.status = 404; // Not Found
@@ -41,6 +49,8 @@ const app = new Elysia()
 
     if (
       error.message === "User already exists" ||
+      error.message === "Car detail already exists for this vehicle" ||
+      error.message === "Motorcycle detail already exists for this vehicle" ||
       error.message.includes("already exists")
     ) {
       set.status = 409; // Conflict
@@ -86,6 +96,10 @@ const app = new Elysia()
       // Masukkan module-module kamu di sini
       .use(auth)
       .use(user)
+      .use(vehicle)
+      .use(vehicleImage)
+      .use(car)
+      .use(motorcycle)
   )
   .get("/", () => {
     // Kamu bisa ganti teks "ELYSIA" jadi nama apps kamu
