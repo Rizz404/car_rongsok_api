@@ -21,7 +21,9 @@ export const usersTable = pgTable(
     email: varchar("email", { length: 255 }).notNull().unique(),
     password: varchar("password", { length: 255 }).notNull(),
 
-    picture: varchar("picture", { length: 500 }),
+    picture: varchar("picture", { length: 500 }).default(
+      "https://i.pinimg.com/736x/53/af/79/53af7981efc7fd7811108b7692b7ffff.jpg"
+    ),
     role: userRoleEnum("role").default("user").notNull(),
 
     age: integer("age"),
