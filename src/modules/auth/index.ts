@@ -2,6 +2,7 @@ import Elysia, { t } from "elysia";
 import { AuthModel } from "./model";
 import { AuthService } from "./service";
 import jwt from "@elysiajs/jwt";
+import { successResponse } from "../../utils/response";
 
 export const auth = new Elysia({ prefix: "/auth" })
   .use(
@@ -10,11 +11,6 @@ export const auth = new Elysia({ prefix: "/auth" })
       secret: process.env.JWT_SECRET || "test",
     })
   )
-  .guard({
-    cookie: t.Cookie({
-      authToken: t.String(),
-    }),
-  })
   .post(
     "/sign-up",
     async ({ body, jwt, cookie: { authToken }, set }) => {
@@ -29,7 +25,14 @@ export const auth = new Elysia({ prefix: "/auth" })
         secure: process.env.NODE_ENV == "production",
       });
 
-      return result.user;
+      set.status = 201; // Created
+      return successResponse(
+        {
+          user: result.user,
+          token,
+        },
+        "User registered successfully"
+      );
     },
     {
       body: AuthModel.signUpBody,
@@ -50,7 +53,14 @@ export const auth = new Elysia({ prefix: "/auth" })
         secure: process.env.NODE_ENV == "production",
       });
 
-      return result.user;
+      set.status = 200; // OK
+      return successResponse(
+        {
+          user: result.user,
+          token,
+        },
+        "Login successful"
+      );
     },
     {
       body: AuthModel.signInBody,

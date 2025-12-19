@@ -14,10 +14,12 @@
     "drizzle-orm": "^0.45.1",
     "elysia": "latest",
     "elysia-logger": "^0.5.2",
+    "figlet": "^1.9.4",
     "logestic": "^1.2.4",
     "pg": "^8.16.3"
   },
   "devDependencies": {
+    "@types/figlet": "^1.7.0",
     "@types/pg": "^8.16.0",
     "bun-types": "latest",
     "drizzle-kit": "^0.31.8"

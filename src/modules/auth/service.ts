@@ -11,7 +11,7 @@ export class AuthService {
       .from(usersTable)
       .where(eq(usersTable.email, data.email));
 
-    if (existingUser) {
+    if (existingUser.length > 0) {
       throw new Error("User already exists");
     }
 
@@ -37,7 +37,7 @@ export class AuthService {
       await db.select().from(usersTable).where(eq(usersTable.email, data.email))
     )[0];
 
-    if (!user || (await password.verify(data.password, user.password))) {
+    if (!user || !(await password.verify(data.password, user.password))) {
       throw new Error("Invalid credentials");
     }
 
