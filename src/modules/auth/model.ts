@@ -5,6 +5,7 @@ export const AuthModel = {
     name: t.String({ minLength: 3, maxLength: 50 }),
     email: t.String({ format: "email" }),
     password: t.String({ minLength: 5 }),
+    age: t.Number(),
   }),
 
   signInBody: t.Object({
@@ -12,9 +13,9 @@ export const AuthModel = {
     password: t.String({ minLength: 5 }),
   }),
 
-  authResponse: t.Object({
+  userResponse: t.Object({
     user: t.Object({
-      id: t.String(),
+      id: t.Number(),
       name: t.String(),
       email: t.String(),
     }),

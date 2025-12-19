@@ -11,6 +11,10 @@ export class AuthService {
       .from(usersTable)
       .where(eq(usersTable.email, data.email));
 
+    if (existingUser) {
+      throw new Error("User already exists");
+    }
+
     const hashedPassword = await password.hash(data.password);
 
     const user = (
@@ -20,6 +24,7 @@ export class AuthService {
           name: data.name,
           email: data.email,
           password: hashedPassword,
+          age: data.age,
         })
         .returning()
     )[0];
