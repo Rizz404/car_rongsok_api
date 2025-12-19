@@ -15,6 +15,13 @@
       "when": 1766109010484,
       "tag": "0001_overjoyed_wendell_vaughn",
       "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "7",
+      "when": 1766116972985,
+      "tag": "0002_silky_doctor_strange",
+      "breakpoints": true
     }
   ]
 }

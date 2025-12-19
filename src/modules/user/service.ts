@@ -49,7 +49,7 @@ export class UserService {
             ? sql`WHERE ${sql.join(whereConditions, "AND")}`
             : undefined
         )
-        .orderBy(desc(usersTable.created_at))
+        .orderBy(desc(usersTable.createdAt))
         .limit(limit)
         .offset(offset),
 
