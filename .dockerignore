@@ -1,8 +1,7 @@
 # Dependencies
 node_modules
-bun.lockb
 
-# Environment variables
+# Environment variables (will be set by Railway)
 .env
 .env.local
 .env.*.local

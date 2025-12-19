@@ -1,18 +1,22 @@
 # Use Bun's official image
-FROM oven/bun:1 as base
+FROM oven/bun:1 AS base
 WORKDIR /usr/src/app
 
 # Install dependencies into temp directory
 # This will cache them and speed up future builds
 FROM base AS install
 RUN mkdir -p /temp/dev
-COPY package.json bun.lockb /temp/dev/
-RUN cd /temp/dev && bun install --frozen-lockfile
+COPY package.json /temp/dev/
+# Copy lockfile if it exists
+COPY --chown=bun:bun bun.lock /temp/dev/bun.lock
+RUN cd /temp/dev && bun install
 
 # Install with --production (exclude devDependencies)
 RUN mkdir -p /temp/prod
-COPY package.json bun.lockb /temp/prod/
-RUN cd /temp/prod && bun install --frozen-lockfile --production
+COPY package.json /temp/prod/
+# Copy lockfile if it exists
+COPY --chown=bun:bun bun.lock /temp/prod/bun.lock
+RUN cd /temp/prod && bun install --production
 
 # Copy node_modules from temp directory
 # Then copy all (non-ignored) project files into the image
